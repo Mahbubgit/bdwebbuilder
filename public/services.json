@@ -1,0 +1,31 @@
+[
+    {
+        "_id":1,
+        "name": "Web Development",
+        "description": "We can develop a beautiful Professional Website for your Business.",
+        "img": "../src/img/services/services1.jpg",
+        "slots": [
+            "07.00 AM - 11.00 PM"
+        ]
+    },
+    {
+        "_id":2,
+        "name": "App Development",
+        "description": "We can develop a beautiful Professional Mobile Application for your Business.",
+        "img": "../src/img/services/services1.jpg",
+        "slots": [
+            "07.00 AM - 11.00 PM"
+        ]
+    },
+    {
+        "_id":3,
+        "name": "Website Upgradation",
+        "description": "We can upgrade your website to promote your Business.",
+        "img": "../src/img/services/services1.jpg",
+        "slots": [
+            "07.00 AM - 11.00 AM",
+            "11.01 AM - 05.00 PM",
+            "05.01 PM - 11.00 PM"
+        ]
+    }
+]

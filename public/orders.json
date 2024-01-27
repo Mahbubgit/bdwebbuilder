@@ -1,0 +1,25 @@
+[
+    {
+        "_id":1,
+        "name": "Web Development",
+        "slots": [
+            "07.00 AM - 11.00 PM"
+        ]
+    },
+    {
+        "_id":2,
+        "name": "App Development",
+        "slots": [
+            "07.00 AM - 11.00 PM"
+        ]
+    },
+    {
+        "_id":3,
+        "name": "Website Upgradation",
+        "slots": [
+            "07.00 AM - 11.00 AM",
+            "11.01 AM - 05.00 PM",
+            "05.01 PM - 11.00 PM"
+        ]
+    }
+]
