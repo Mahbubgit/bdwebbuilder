@@ -15,10 +15,14 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Footer from './Pages/Shared/Footer';
 import Order from './Pages/Order/Order';
 import OrderStatus from './Pages/Order/OrderStatus';
+import SignUp from './Pages/Login/SignUp';
+import RequireAuth from './Pages/Login/RequireAuth';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div  className='max-w-7xl mx-auto px-12'>
+    <div className='max-w-7xl mx-auto px-12'>
       <Navbar></Navbar>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
@@ -31,11 +35,17 @@ function App() {
         <Route path='blog' element={<Blogs></Blogs>}></Route>
         <Route path='faq' element={<Faq></Faq>}></Route>
         <Route path='contact' element={<Contact></Contact>}></Route>
-        <Route path='order' element={<Order></Order>}></Route>
+        <Route path='order' element={
+          <RequireAuth>
+            <Order></Order>
+          </RequireAuth>
+        }></Route>
         <Route path='orderStatus' element={<OrderStatus></OrderStatus>}></Route>
         <Route path='login' element={<Login></Login>}></Route>
+        <Route path='signup' element={<SignUp></SignUp>}></Route>
       </Routes>
       <Footer></Footer>
+      <ToastContainer />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const OrderItems = ({ orderItems, setDevelopment }) => {
-    const { name, slots } = orderItems;
+const OrderItems = ({ service, setDevelopment }) => {
+    const { name, slots } = service;
     return (
         <div  className="card lg:max-w-lg bg-base-100 shadow-xl">
             <div  className="card-body justify-center items-center">
@@ -18,7 +18,7 @@ const OrderItems = ({ orderItems, setDevelopment }) => {
                     <label
                         htmlFor="order-modal"
                         disabled={slots.length === 0}
-                        onClick={() => setDevelopment(orderItems)}
+                        onClick={() => setDevelopment(service)}
                          className="btn btn-sm text-white font-bold bg-gradient-to-r from-primary to-secondary"
                          >Order Now</label>
                 </div>
