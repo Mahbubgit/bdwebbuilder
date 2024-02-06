@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react';
 const OrderStatus = () => {
     const [bookingStatus, setBookingStatus] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/booking')
+        fetch('http://localhost:5000/bookingStatus')
             .then(res => res.json())
             .then(data => setBookingStatus(data));
     }, [])
 
     return (
         // const booking = {
-        //     orderId: _id,
-        //     orderName: name,
+        //     serviceId: _id,
+        //     serviceName: name,
         //     date: formattedDate,
         //     slot,
         //     clientName: user.displayName,
@@ -54,7 +54,7 @@ const OrderStatus = () => {
                                     <td>{bookingItems.companyName}</td>
                                     <td>{bookingItems.designation}</td>
                                     <td>{bookingItems.location}</td>
-                                    <td>{bookingItems.orderName}</td>
+                                    <td>{bookingItems.serviceName}</td>
                                     <td>{bookingItems.date}</td>
                                     <td>{bookingItems.status}</td>
                                 </tr>

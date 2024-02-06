@@ -2,23 +2,37 @@ import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import OrderItems from './OrderItems';
 import OrderModal from './OrderModal';
+import { useQuery } from 'react-query';
+import Loading from '../Shared/Loading';
 
 const OrderDetails = ({ date }) => {
-    const [services, setServices] = useState([]);
+    // const [services, setServices] = useState([]);
     const [development, setDevelopment] = useState(null);
+    const formattedDate = format(date, 'PP');
 
-    useEffect(() => {
-        fetch('http://localhost:5000/services')
-            .then(res => res.json())
-            .then(data => setServices(data));
-    }, []);
+    const { data: services, isLoading, refetch } =
+        useQuery(['available',formattedDate],
+            () => fetch(`http://localhost:5000/available?date=${formattedDate}`)
+                .then(res => res.json())
+        );
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+    // fetch('http://localhost:5000/services')
+
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/available?date=${formattedDate}`)
+    //         .then(res => res.json())
+    //         .then(data => setServices(data));
+    // }, [formattedDate]);
 
     return (
-        <div>
-            <h4 className='text-xl lg:text-2xl font-bold text-accent text-center my-10'>Order Generated on {format(date, 'PP')}</h4>
+        <div className='my-10'>
+            <h4 className='text-xl lg:text-2xl font-bold text-accent text-center'>Order Generated on {format(date, 'PP')}</h4>
             <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
-                    services.map(service => <OrderItems
+                    services?.map(service => <OrderItems
                         key={service._id}
                         service={service}
                         setDevelopment={setDevelopment}
@@ -29,6 +43,7 @@ const OrderDetails = ({ date }) => {
                 date={date}
                 development={development}
                 setDevelopment={setDevelopment}
+                refetch={refetch}
             ></OrderModal>}
         </div>
     );

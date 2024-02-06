@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
 
-const OrderModal = ({ development, date, setDevelopment }) => {
+const OrderModal = ({ development, date, setDevelopment, refetch }) => {
     const { _id, name, slots } = development;
     const [user, loading, error] = useAuthState(auth);
     const formattedDate = format(date, 'PP');
@@ -15,8 +15,8 @@ const OrderModal = ({ development, date, setDevelopment }) => {
         console.log(_id, name, slot);
 
         const booking = {
-            orderId: _id,
-            orderName: name,
+            serviceId: _id,
+            serviceName: name,
             date: formattedDate,
             slot,
             clientName: user.displayName,
@@ -37,13 +37,14 @@ const OrderModal = ({ development, date, setDevelopment }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if(data.success){
-                    toast(`Booking is completed, ${formattedDate} at ${slot}`);
+                    toast(`Booking is completed at ${formattedDate}, ${slot}`);
                 }
                 else{
-                    toast.error(`You have already booking on ${data.booking?.date} at ${data.booking?.slot}`);
+                    toast.error(`You already have booking on ${data.booking?.date} at ${data.booking?.slot}`);
                 }
+                refetch();
                 //to close modal
                 setDevelopment(null);
             })
