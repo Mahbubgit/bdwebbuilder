@@ -28,9 +28,9 @@ const OrderStatus = () => {
                     <tr className='bg-gray-500 text-white'>
                         <td>Sl No</td>
                         {/* clientName */}
-                        <td>Name</td> 
+                        <td>Name</td>
                         {/* clientEmail */}
-                        <td>User</td> 
+                        <td>User</td>
                         {/* companyName */}
                         <td>Company</td>
                         <td>Designation</td>
@@ -44,29 +44,31 @@ const OrderStatus = () => {
                 </thead>
                 <tbody>
                     {
-                        bookingStatus.map((bookingItems, index) =>
+                        bookingStatus.map((bookingItems, key) =>
 
-                            <>
-                                <tr className=''>
-                                    <td>{bookingItems.key = index+1}</td>
-                                    <td>{bookingItems.clientName}</td>
-                                    <td>{bookingItems.clientEmail}</td>
-                                    <td>{bookingItems.companyName}</td>
-                                    <td>{bookingItems.designation}</td>
-                                    <td>{bookingItems.location}</td>
-                                    <td>{bookingItems.serviceName}</td>
-                                    <td>{bookingItems.date}</td>
-                                    <td>{bookingItems.status}</td>
-                                </tr>
-                            </>
+
+                            <tr
+                                className='hover'
+                                key={key}
+                            >
+                                <td>{key + 1}</td>
+                                <td>{bookingItems.clientName}</td>
+                                <td>{bookingItems.clientEmail}</td>
+                                <td>{bookingItems.companyName}</td>
+                                <td>{bookingItems.designation}</td>
+                                <td>{bookingItems.location}</td>
+                                <td>{bookingItems.serviceName}</td>
+                                <td>{bookingItems.date}</td>
+                                <td>{bookingItems.status}</td>
+                            </tr>
                         )
                     }
                 </tbody>
                 <tfoot>
-                <tr className='bg-gray-500 text-white'>
+                    <tr className='bg-gray-500 text-white'>
                         <td>Sl No</td>
                         <td>Name</td>
-                        <td>User</td> 
+                        <td>User</td>
                         <td>Company</td>
                         <td>Designation</td>
                         <td>Location</td>

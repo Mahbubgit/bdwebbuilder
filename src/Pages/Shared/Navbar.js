@@ -21,6 +21,7 @@ const Navbar = () => {
     const [user, loading, error] = useAuthState(auth);
     const logout = () => {
         signOut(auth);
+        localStorage.removeItem('accessToken');
     };
 
     const menuItems = <>
@@ -55,8 +56,8 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <img className="lg:w-1/3 md:w-1/4 sm:w-1/5" src={logo} alt="" />
-                <span className='text-gray-600 ms-2 sm:text-xs text-sm'>{format(new Date(), 'PP')}</span>
+                <img className='w-3/4' src={logo} alt="" />
+                {/* <span className='lg:text-gray-600 ms-2 text-sm'>{format(new Date(), 'PP')}</span> */}
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
