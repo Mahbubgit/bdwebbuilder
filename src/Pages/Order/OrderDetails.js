@@ -12,24 +12,24 @@ const OrderDetails = ({ date }) => {
 
     const { data: services, isLoading, refetch } =
         useQuery(['available',formattedDate],
-            () => fetch(`http://localhost:5000/available?date=${formattedDate}`)
+            () => fetch(`https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/available?date=${formattedDate}`)
                 .then(res => res.json())
         );
 
     if (isLoading) {
         return <Loading></Loading>
     }
-    // fetch('http://localhost:5000/services')
+    // fetch('https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/services')
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/available?date=${formattedDate}`)
+    //     fetch(`https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/available?date=${formattedDate}`)
     //         .then(res => res.json())
     //         .then(data => setServices(data));
     // }, [formattedDate]);
 
     return (
         <div className='my-10'>
-            <h4 className='text-xl lg:text-2xl font-bold text-accent text-center'>Order Generated on {format(date, 'PP')}</h4>
+            <h4 className='md:text-xl lg:text-2xl font-bold text-accent text-center'>Order Generated on {format(date, 'PP')}</h4>
             <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
                     services?.map(service => <OrderItems

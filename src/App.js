@@ -22,9 +22,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import MyBookings from './Pages/Dashboard/MyBookings';
 import MyReview from './Pages/Dashboard/MyReview';
-import MyHistory from './Pages/Dashboard/MyHistory';
-import Users from './Pages/Dashboard/Users';
 import RequireAdmin from './Pages/Login/RequireAdmin';
+import MyBookingHistory from './Pages/Dashboard/MyBookingHistory';
+import AllBookings from './Pages/Dashboard/AllBookings';
+import MyProfile from './Pages/Dashboard/MyProfile';
+import ManageUsers from './Pages/Dashboard/ManageUsers';
 
 function App() {
   return (
@@ -49,8 +51,10 @@ function App() {
         <Route path='dashboard' element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
           <Route index element={<MyBookings></MyBookings>}></Route>
           <Route path='myReview' element={<MyReview></MyReview>}></Route>
-          <Route path='myHistory' element={<MyHistory></MyHistory>}></Route>
-          <Route path='users' element={<RequireAdmin><Users></Users></RequireAdmin>}></Route>
+          <Route path='myBookingHistory' element={<MyBookingHistory></MyBookingHistory>}></Route>
+          <Route path='myProfile' element={<MyProfile></MyProfile>}></Route>
+          <Route path='allBookings' element={<RequireAdmin><AllBookings></AllBookings></RequireAdmin>}></Route>
+          <Route path='manageUsers' element={<RequireAdmin><ManageUsers></ManageUsers></RequireAdmin>}></Route>
         </Route>
         <Route path='orderStatus' element={<OrderStatus></OrderStatus>}></Route>
         <Route path='login' element={<Login></Login>}></Route>

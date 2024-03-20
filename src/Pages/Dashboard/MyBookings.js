@@ -1,39 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
+import BookingDeleteModal from './BookingDeleteModal';
+import MyBookingRow from './MyBookingRow';
+import Loading from '../Shared/Loading';
+import { useQuery } from 'react-query';
 
 const MyBookings = () => {
 
     const [bookings, setBookings] = useState([]);
+    const [deleteBooking, setDeleteBooking] = useState(null);
+
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
 
-    console.log(user.displayName, user.email);
-
-    useEffect(() => {
-        if (user) {
-            fetch(`http://localhost:5000/dashboardBooking?clientEmail=${user.email}`, {
-                method: 'GET',
-                headers: {
-                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-                }
-            })
-                .then(res => {
-                    console.log('res', res);
-                    if (res.status === 401 || res.status === 403) {
-                        signOut(auth);
-                        localStorage.removeItem('accessToken');
-                        navigate('/');
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    setBookings(data);
-                });
+    // console.log(user.displayName, user.email);
+    const { data: clientEmail, isLoading, refetch } = useQuery('manageUsers', () => fetch(`https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/dashboardBooking?clientEmail=${user.email}`, {
+        method: 'GET',
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
-    }, [user]);
+    })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth);
+                localStorage.removeItem('accessToken');
+                navigate('/');
+            }
+            return res.json();
+        })
+        .then(data => {
+            // console.log(data);
+            setBookings(data);
+            // setDeleteBooking(data);
+        })
+    );
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div>
@@ -45,28 +52,33 @@ const MyBookings = () => {
                         <tr className='bg-gray-300 text-pink'>
                             <th></th>
                             <th>Name</th>
+                            <th>Service</th>
                             <th>Date</th>
                             <th>Time</th>
-                            <th>Service</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+
                         {
-                            bookings.map((b, key) =>
-                                <tr className='hover' key={key}>
-                                    <th>{key + 1}</th>
-                                    <td>{b.clientName}</td>
-                                    <td>{b.date}</td>
-                                    <td>{b.slot}</td>
-                                    <td>{b.serviceName}</td>
-                                    <td><button className="btn btn-outline">Delete</button></td>
-                                </tr>)
+                            bookings.map((booking, index) => <MyBookingRow
+                                key={index}
+                                booking={booking}
+                                index={index}
+                                setDeleteBooking={setDeleteBooking}
+                            ></MyBookingRow>)
                         }
 
                     </tbody>
                 </table>
             </div>
+            {
+                deleteBooking && <BookingDeleteModal
+                    deleteBooking={deleteBooking}
+                    refetch={refetch}
+                    setDeleteBooking={setDeleteBooking}
+                ></BookingDeleteModal>
+            }
         </div>
     );
 

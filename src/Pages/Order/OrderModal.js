@@ -28,7 +28,7 @@ const OrderModal = ({ development, date, setDevelopment, refetch }) => {
             status: 'Pending'
         }
 
-        fetch('http://localhost:5000/booking', {
+        fetch('https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

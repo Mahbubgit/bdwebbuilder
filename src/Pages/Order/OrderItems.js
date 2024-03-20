@@ -5,7 +5,7 @@ const OrderItems = ({ service, setDevelopment }) => {
     return (
         <div  className="card lg:max-w-lg bg-base-100 shadow-xl">
             <div  className="card-body justify-center items-center">
-                <h2  className="card-title text-bold text-2xl text-primary">{name}</h2>
+                <h2  className="card-title sm:text-xs md:text-xl lg:text-2xl font-bold text-primary">{name}</h2>
                 <p>
                     {
                         slots.length > 0
@@ -13,7 +13,7 @@ const OrderItems = ({ service, setDevelopment }) => {
                             : <span className='text-red-500'>Try another date.</span>
                     }
                 </p>
-                <p>{slots.length} {slots.length > 1 ? 'orders' : 'order'} available</p>
+                <p>{slots.length > 1 ? slots.length + ' orders available' : (slots.length > 0 ? '1 order available' : ' ')}</p>
                 <div  className="card-actions">
                     <label
                         htmlFor="order-modal"

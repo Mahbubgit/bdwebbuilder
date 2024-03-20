@@ -3,9 +3,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import Loading from '../Shared/Loading';
+import Loading from '../Shared/Loading/Loading';
 
-const MyReview = () => {
+const AddAReview = () => {
+
     const [user, isLoading] = useAuthState(auth);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
@@ -28,28 +29,26 @@ const MyReview = () => {
                 if (result.success) {
                     const img = result.data.url;
                     // console.log(data.rating);
-                    const reviews = {
+                    const review = {
                         name: data.name,
-                        email: user.email,
                         rating: data.rating,
-                        review: data.review,
-                        designation: data.designation,
+                        description: data.description,
                         location: data.location,
                         post: data.post,
                         img: img
                     }
                     // send to your database
-                    fetch('http://localhost:5000/addReview', {
+                    fetch('https://calm-lake-97858.herokuapp.com/review', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
                             authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         },
-                        body: JSON.stringify(reviews)
+                        body: JSON.stringify(review)
                     })
                         .then(res => res.json())
                         .then(inserted => {
-                            console.log('review', inserted);
+                            // console.log('review', inserted);
                             if (inserted.insertedId) {
                                 toast.success('Your review added successfully');
                                 reset();
@@ -59,6 +58,7 @@ const MyReview = () => {
                             }
                         })
                 }
+                // console.log('imgbb', result);
             })
     };
 
@@ -66,9 +66,11 @@ const MyReview = () => {
         return <Loading></Loading>
     }
 
+
     return (
-        <div className='text-center'>
-            <h2 className='text-2xl text-center mt-2'> My Review</h2>
+
+        <div>
+            {/* <h2 className='text-4xl text-primary font-bold'> Please Add A Review</h2> */}
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="form-control mx-auto w-full max-w-xs">
@@ -99,41 +101,29 @@ const MyReview = () => {
                         <input type="radio" name="rating-10" value="3.50" {...register("rating")} className="bg-green-500 mask mask-star-2 mask-half-1" />
                         <input type="radio" name="rating-10" value="4.00" {...register("rating")} className="bg-green-500 mask mask-star-2 mask-half-2" />
                         <input type="radio" name="rating-10" value="4.50" {...register("rating")} className="bg-green-500 mask mask-star-2 mask-half-1" />
-                        <input type="radio" name="rating-10" value="5.00" {...register("rating")} className="bg-green-500 mask mask-star-2 mask-half-2" checked />
+                        <input type="radio" name="rating-10" value="5.00" {...register("rating")} className="bg-green-500 mask mask-star-2 mask-half-2" checked/>
                     </div>
                 </div>
 
                 <div className="form-control mx-auto w-full max-w-xs">
                     <label className="label">
-                        <span className="label-text">Review</span>
+                        <span className="label-text">Description</span>
                     </label>
-                    {/* <textarea className="textarea textarea-bordered" placeholder="Message"></textarea> */}
-                    <textarea
-                        type="textarea"
-                        placeholder="Review"
-                        className="textarea textarea-bordered w-full max-w-xs"
-                        {...register("review", {
+                    <input
+                        type="text"
+                        placeholder="Description"
+                        className="input input-bordered w-full max-w-xs"
+                        {...register("description", {
                             required: {
                                 value: true,
-                                message: 'Review is Required'
+                                message: 'Description is Required'
                             }
                         }
                         )}
                     />
                     <label className="label">
-                        {errors.review?.type === 'required' && <span className="label-text-alt text-red-600">{errors.review.message}</span>}
+                        {errors.description?.type === 'required' && <span className="label-text-alt text-red-600">{errors.description.message}</span>}
                     </label>
-                </div>
-                <div className="form-control mx-auto w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Designation</span>
-                    </label>
-                    <input
-                        type="text"
-                        placeholder="Your Designation"
-                        className="input input-bordered w-full max-w-xs"
-                        {...register("designation")}
-                    />
                 </div>
                 <div className="form-control mx-auto w-full max-w-xs">
                     <label className="label">
@@ -152,7 +142,7 @@ const MyReview = () => {
                     </label>
                     <input
                         type="text"
-                        placeholder="Posting Month and Year"
+                        placeholder="Post month, year"
                         className="input input-bordered w-full max-w-xs"
                         {...register("post")}
                     />
@@ -167,7 +157,7 @@ const MyReview = () => {
                         {...register("image", {
                             required: {
                                 value: true,
-                                message: 'Image is Required'
+                                message: 'image is Required'
                             }
                         }
                         )}
@@ -177,10 +167,10 @@ const MyReview = () => {
                     </label>
                 </div>
 
-                <input className='btn w-full max-w-xs btn-outline' type="submit" value="Add Review" />
+                <input className='btn w-full max-w-xs' type="submit" value="Add Review" />
             </form>
         </div>
     );
 };
 
-export default MyReview;
+export default AddAReview;

@@ -5,9 +5,9 @@ import 'react-day-picker/dist/style.css';
 
 const OrderBanner = ({ date, setDate }) => {
     return (
-        <div  className="hero">
-            <div  className="hero-content flex-col lg:flex-row-reverse">
-                <img src={OrderNow}  className="max-w-sm rounded-lg" alt='Order Now' />
+        <div className="hero">
+            <div className="hero-content flex-col lg:flex-row-reverse">
+                <img src={OrderNow} className="lg:max-w-sm rounded-lg" alt='Order Now' />
                 <div>
                     <DayPicker
                         mode="single"

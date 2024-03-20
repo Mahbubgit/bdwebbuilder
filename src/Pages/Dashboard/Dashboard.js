@@ -1,11 +1,8 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-// import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
 import auth from '../../firebase.init';
 import useAdmin from '../../hooks/useAdmin';
-// import auth from '../../firebase.init';
-// import Loading from '../Shared/Loading';
 
 const Dashboard = () => {
     const [user] = useAuthState(auth);
@@ -24,8 +21,14 @@ const Dashboard = () => {
                     {/* Sidebar content here */}
                     <li><Link to={"/dashboard"}>My Bookings</Link></li>
                     <li><Link to={"/dashboard/myReview"}>My Review</Link></li>
-                    <li><Link to={"/dashboard/myHistory"}>My Booking History</Link></li>
-                    {admin && <li><Link to={"/dashboard/users"}>All Users</Link></li>}
+                    <li><Link to={"/dashboard/myBookingHistory"}>My Booking History</Link></li>
+                    <li><Link to={"/dashboard/myProfile"}>My Profile</Link></li>
+                    {admin &&
+                        <>
+                            <li><Link to={"/dashboard/allBookings"}>All Bookings</Link></li>
+                            <li><Link to={"/dashboard/manageUsers"}>Manage Users</Link></li>
+                        </>
+                    }
                 </ul>
 
             </div>
