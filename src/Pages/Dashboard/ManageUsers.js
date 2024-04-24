@@ -7,7 +7,7 @@ import UserDeleteModal from './UserDeleteModal';
 const ManageUsers = () => {
     const [deleteUser, setDeleteUser] = useState(null);
 
-    const { data: users, isLoading, refetch } = useQuery('manageUsers', () => fetch('https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/users', {
+    const { data: users, isLoading, refetch } = useQuery('manageUsers', () => fetch('http://localhost:5000/users', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -39,7 +39,7 @@ const ManageUsers = () => {
                         {
                             users.map((user, index) => <ManageUserRow
                                 key={index}
-                                u={user}
+                                user={user}
                                 index={index}
                                 refetch={refetch}
                                 setDeleteUser={setDeleteUser}

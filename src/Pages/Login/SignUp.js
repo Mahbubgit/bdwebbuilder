@@ -34,7 +34,7 @@ const SignUp = () => {
     }
 
     if (token) {
-        navigate('/order');
+        navigate('/dashboard/myProfile');
     }
 
     const onSubmit = async data => {
@@ -42,7 +42,7 @@ const SignUp = () => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
         // console.log('update done');
-        // navigate('/order');
+        // navigate('/dashboard/myProfile');
     };
     return (
         <div className='flex h-screen justify-center items-center'>
@@ -124,7 +124,7 @@ const SignUp = () => {
                         {signInError}
                         <input className='btn btn-neutral w-full max-w-xs text-white' type="submit" value="Sign Up" />
                     </form>
-                    <p>Already have an account? <Link className='text-secondary' to="/login">Please Login</Link></p>
+                    <p className='text-center'>Already have an account? <Link className='text-green-700' to="/login">Please Login</Link></p>
                     <div className="divider">OR</div>
                     <button
                         onClick={() => signInWithGoogle()}

@@ -1,6 +1,5 @@
 import React from 'react';
 import HeroPic from '../../img/hero-bg.jpg';
-import Button from '../Shared/Button';
 
 const Banner = () => {
     return (
@@ -12,7 +11,7 @@ const Banner = () => {
                     <h1 className="sm:text-xl md:text-2xl lg:text-4xl font-bold">Welcome to BDWebBuilder!</h1>
                     <p className="py-6">We offer best solutions for growing your business.
                         We are team of talented developers making websites to help you.</p>
-                    <Button>Get Started</Button>
+                    <a className="btn text-white font-bold bg-gradient-to-r from-primary to-secondary" href='order'>Get Started</a>
                 </div>
             </div>
         </div>

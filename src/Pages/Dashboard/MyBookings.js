@@ -17,25 +17,25 @@ const MyBookings = () => {
     const navigate = useNavigate();
 
     // console.log(user.displayName, user.email);
-    const { data: clientEmail, isLoading, refetch } = useQuery('manageUsers', () => fetch(`https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/dashboardBooking?clientEmail=${user.email}`, {
-        method: 'GET',
-        headers: {
-            authorization: `Bearer ${localStorage.getItem('accessToken')}`
-        }
-    })
-        .then(res => {
-            if (res.status === 401 || res.status === 403) {
-                signOut(auth);
-                localStorage.removeItem('accessToken');
-                navigate('/');
+    const { data: isLoading, refetch } = useQuery('manageBookings', () =>
+        fetch(`http://localhost:5000/dashboardBooking?clientEmail=${user.email}`, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
-            return res.json();
         })
-        .then(data => {
-            // console.log(data);
-            setBookings(data);
-            // setDeleteBooking(data);
-        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    signOut(auth);
+                    localStorage.removeItem('accessToken');
+                    navigate('/');
+                }
+                return res.json();
+            })
+            .then(data => {
+                setBookings(data);
+                // setDeleteBooking(data);
+            })
     );
 
     if (isLoading) {

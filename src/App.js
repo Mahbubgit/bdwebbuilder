@@ -1,7 +1,6 @@
 import './App.css';
 import About from './Pages/About/About';
 import Team from './Pages/About/Team';
-import Testimonials from './Pages/Home/Testimonials';
 import Blogs from './Pages/Blogs/Blogs';
 import Contact from './Pages/Contact/Contact';
 import Faq from './Pages/FAQ/Faq';
@@ -27,6 +26,7 @@ import MyBookingHistory from './Pages/Dashboard/MyBookingHistory';
 import AllBookings from './Pages/Dashboard/AllBookings';
 import MyProfile from './Pages/Dashboard/MyProfile';
 import ManageUsers from './Pages/Dashboard/ManageUsers';
+import Testimonials from './Pages/About/Testimonials';
 
 function App() {
   return (
@@ -50,8 +50,8 @@ function App() {
         }></Route>
         <Route path='dashboard' element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
           <Route index element={<MyBookings></MyBookings>}></Route>
-          <Route path='myReview' element={<MyReview></MyReview>}></Route>
           <Route path='myBookingHistory' element={<MyBookingHistory></MyBookingHistory>}></Route>
+          <Route path='myReview' element={<MyReview></MyReview>}></Route>
           <Route path='myProfile' element={<MyProfile></MyProfile>}></Route>
           <Route path='allBookings' element={<RequireAdmin><AllBookings></AllBookings></RequireAdmin>}></Route>
           <Route path='manageUsers' element={<RequireAdmin><ManageUsers></ManageUsers></RequireAdmin>}></Route>

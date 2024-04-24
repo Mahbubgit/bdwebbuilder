@@ -3,11 +3,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import Loading from '../Shared/Loading';
+import useLoginUser from '../../hooks/useLoginUser';
 
 const MyProfile = () => {
-
-    const [user, loading, error] = useAuthState(auth);
+    const [user, isLoading] = useAuthState(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [loginUserData, loginUserLoading] = useLoginUser(user);
+
     /**
      * *
      * 3 ways to store images
@@ -39,6 +42,7 @@ const MyProfile = () => {
                         name: data.name,
                         email: user.email,
                         company: data.company,
+                        designation: data.designation,
                         mobile: data.mobile,
                         address: data.address,
                         img: img
@@ -53,25 +57,42 @@ const MyProfile = () => {
                         body: JSON.stringify(profileUser)
                     })
                         .then(res => res.json())
-                        .then(updated => {
+                        .then(data => {
                             // console.log('User Profile', updated);
-                            if(updated.modifiedCount){
+                            if (data.modifiedCount) {
                                 toast.success('Profile Updated Successfully.');
                                 // reset();
                             }
-                            else{
+                            else {
                                 toast.error('Failed to update profile data');
                             }
                         })
                 }
-                // console.log('user data', user);
             })
     };
 
+    if (isLoading || loginUserLoading) {
+        return <Loading></Loading>
+    }
+
     return (
         <div>
+            <div className='text-center mt-6'>
 
-            <h2 className="text-2xl mt-2 mb-2 text-center">My Profile</h2>
+                <h2 className="text-2xl">My Profile</h2>
+                {
+                    loginUserData.img
+                        ?
+                        <div className="avatar justify-center m-3">
+                            <div className="w-24 rounded ring ring-primary ring-offset-base-100 ring-offset-2">
+                                <img src={loginUserData.img} alt="Profile" />
+                            </div>
+                        </div>
+                        :
+                        <p className='font-bold text-red-700 m-3'>Please update your profile so that your information can be use to everywhere.</p>
+                        
+                }
+            </div>
 
             <form className='lg:ms-96 md:ms-48 sm:ms-2' onSubmit={handleSubmit(onSubmit)}>
 
@@ -83,6 +104,7 @@ const MyProfile = () => {
                         type="text"
                         placeholder="Your Name"
                         className="input input-bordered w-full max-w-xs"
+                        defaultValue={loginUserData.name ? loginUserData.name : ''}
                         {...register("name", {
                             required: {
                                 value: true,
@@ -116,18 +138,47 @@ const MyProfile = () => {
                         type="text"
                         placeholder="Company Name"
                         className="input input-bordered w-full max-w-xs"
-                        {...register("company")}
+                        defaultValue={loginUserData.company ? loginUserData.company : ''}
+                        {...register("company", {
+                            required: {
+                                value: true,
+                                message: 'Company is Required'
+                            }
+                        })}
                     />
+                    <label className="label">
+                        {errors.company?.type === 'required' && <span className='label-text-alt text-red-500'>{errors.company.message}</span>}
+                    </label>
                 </div>
-
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text">Designation</span>
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="Designation"
+                        defaultValue={loginUserData.designation ? loginUserData.designation : ''}
+                        className="input input-bordered w-full max-w-xs"
+                        {...register("designation", {
+                            required: {
+                                value: true,
+                                message: 'Designation is Required'
+                            }
+                        })}
+                    />
+                    <label className="label">
+                        {errors.designation?.type === 'required' && <span className='label-text-alt text-red-500'>{errors.designation.message}</span>}
+                    </label>
+                </div>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Mobile Number</span>
                     </label>
                     <input
                         type="text"
-                        placeholder="Mobile No"
+                        placeholder="Mobile Number"
                         maxLength={11}
+                        defaultValue={loginUserData.mobile ? loginUserData.mobile : ''}
                         className="input input-bordered w-full max-w-xs"
                         {...register("mobile", {
                             required: {
@@ -148,31 +199,35 @@ const MyProfile = () => {
                     <input
                         type="text"
                         placeholder="Address"
+                        defaultValue={loginUserData.address ? loginUserData.address : ''}
                         className="input input-bordered w-full max-w-xs"
-                        {...register("address")}
-                    />
-                </div>
-
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Photo</span>
-                    </label>
-                    <input
-                        type="file"
-                        className="input input-bordered w-full max-w-xs"
-                        {...register("image", {
+                        {...register("address", {
                             required: {
                                 value: true,
-                                message: 'Photo is Required'
+                                message: 'Address is Required'
                             }
                         })}
                     />
                     <label className="label">
-                        {errors.image?.type === 'required' && <span className='label-text-alt text-red-500'>{errors.image.message}</span>}
+                        {errors.address?.type === 'required' && <span className='label-text-alt text-red-500'>{errors.address.message}</span>}
                     </label>
                 </div>
 
-                <input className='btn w-full max-w-xs btn-outline mt-3' type="submit" value="Update" />
+
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text">Your Photo</span>
+                    </label>
+                    <input
+                        type="file"
+                        className="input input-bordered w-full max-w-xs"
+                        {...register("image")}
+                    />
+                </div>
+                <div>
+                    <input className='btn w-full max-w-xs btn-outline mt-3' type="submit" value="Update" />
+                    <p className='text-red-700'>*** Please edit all fields for update. ***</p>
+                </div>
             </form>
         </div>
     );

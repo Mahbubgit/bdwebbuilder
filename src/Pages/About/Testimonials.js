@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import quote from '../../img/icons/quote.svg';
-import Review from './Review';
+import Review from '../Home/Review';
 
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch('https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/reviews')
+        fetch('http://localhost:5000/reviews')
             .then(res => res.json())
             .then(data => setReviews(data));
     }, [])
@@ -15,7 +15,7 @@ const Testimonials = () => {
         <section className='my-10  '>
             <div className='flex justify-between'>
                 <div className='p-2'>
-                    <h4 className='text-xl lg:text-2xl text-primary font-bold mt-10'>Testimonials</h4>
+                    <h4 className='text-primary text-xl lg:text-2xl font-bold mt-10'>Testimonials</h4>
                     <h2 className='sm:text-xl md:text-2xl lg:text-4xl text-accent my-3'>What Our Clients Say</h2>
                 </div>
                 <div>

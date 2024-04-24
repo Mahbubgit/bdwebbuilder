@@ -13,7 +13,7 @@ const MyBookingHistory = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/dashboardBooking?clientEmail=${user.email}`, {
+            fetch(`http://localhost:5000/dashboardBooking?clientEmail=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`

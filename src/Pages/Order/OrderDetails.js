@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import OrderItems from './OrderItems';
 import OrderModal from './OrderModal';
 import { useQuery } from 'react-query';
@@ -11,18 +11,18 @@ const OrderDetails = ({ date }) => {
     const formattedDate = format(date, 'PP');
 
     const { data: services, isLoading, refetch } =
-        useQuery(['available',formattedDate],
-            () => fetch(`https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/available?date=${formattedDate}`)
+        useQuery(['available', formattedDate],
+            () => fetch(`http://localhost:5000/available?date=${formattedDate}`)
                 .then(res => res.json())
         );
 
     if (isLoading) {
         return <Loading></Loading>
     }
-    // fetch('https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/services')
+    // fetch('http://localhost:5000/services')
 
     // useEffect(() => {
-    //     fetch(`https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/available?date=${formattedDate}`)
+    //     fetch(`http://localhost:5000/available?date=${formattedDate}`)
     //         .then(res => res.json())
     //         .then(data => setServices(data));
     // }, [formattedDate]);

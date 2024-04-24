@@ -1,12 +1,12 @@
 import React from 'react';
-import Team from './Team';
-import Testimonials from '../Home/Testimonials';
+// import Team from './Team';
+import Testimonials from './Testimonials';
+import CompanyInfo from './CompanyInfo';
 
 const About = () => {
     return (
         <div>
-            <h2>This is About Page.</h2>
-           <Team></Team>
+           <CompanyInfo></CompanyInfo>
            <Testimonials></Testimonials>
         </div>
     );

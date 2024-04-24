@@ -6,7 +6,7 @@ const Services = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/services')
+        fetch('http://localhost:5000/services')
         .then(res => res.json())
         .then(data => setServices(data));
     }, []);
@@ -14,7 +14,7 @@ const Services = () => {
     return (
         <div className='my-10  '>
             <div className='text-center p-2'>
-                <h3 className='text-primary text-xl lg:text-2xl font-bold uppercase'>Our Services</h3>
+                <h3 className='text-primary text-xl lg:text-2xl font-bold'>Our Services</h3>
                 <h2 className='text-2xl lg:text-4xl'>Services We Provide</h2>
             </div>
             <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
@@ -33,7 +33,7 @@ const Services = () => {
                     <div>
                         <h3 className="text-3xl font-bold">We are here to help Your Online Business!</h3>
                         <p className="py-6">We can develop a beautiful Professional Website to promote your online business.</p>
-                        <Button>Order Now</Button>
+                        <a className="btn text-white font-bold bg-gradient-to-r from-primary to-secondary" href='order'>Order Now</a>
                     </div>
                 </div>
             </div>

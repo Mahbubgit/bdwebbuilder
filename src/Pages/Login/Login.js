@@ -104,7 +104,7 @@ const Login = () => {
                         {signInError}
                         <input className='btn btn-neutral w-full max-w-xs text-white' type="submit" value="Login" />
                     </form>
-                    <p>New to bdWEBbuilder? <Link className='text-secondary' to="/signup">Create New Account</Link></p>
+                    <p className='text-center'>New to bdWEBbuilder? <Link className='text-green-700' to="/signup">Create New Account</Link></p>
                     <div className="divider">OR</div>
                     <button
                         onClick={() => signInWithGoogle()}

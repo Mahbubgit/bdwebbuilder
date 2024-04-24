@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MyBookingRow = ({ booking, index, setDeleteBooking }) => {
-    const { _id, clientName, serviceName, date, slot } = booking;
+    const { _id, clientName, serviceName, date, slot, status } = booking;
     return (
         <tr className='hover'>
             <th>{index + 1}</th>
@@ -10,7 +10,13 @@ const MyBookingRow = ({ booking, index, setDeleteBooking }) => {
             <td>{date}</td>
             <td>{slot}</td>
             <td>
-                <label onClick={() => setDeleteBooking(_id)} htmlFor="delete-booking-modal" className="btn btn-outline btn-sm">Delete</label>
+                {
+                    status === 'Pending' &&
+                    <label onClick={() => setDeleteBooking(_id)} htmlFor="delete-booking-modal" className="btn btn-outline btn-sm">Delete</label>
+                }
+                {
+                    status !== 'Pending' && status
+                }
             </td>
         </tr>
     );

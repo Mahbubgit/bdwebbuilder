@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const OrderStatus = () => {
     const [bookingStatus, setBookingStatus] = useState([]);
     useEffect(() => {
-        fetch('https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/bookingStatus')
+        fetch('http://localhost:5000/bookingStatus')
             .then(res => res.json())
             .then(data => setBookingStatus(data));
     }, [])
@@ -50,7 +50,7 @@ const OrderStatus = () => {
                                 key={key}
                             >
                                 <td>{key + 1}</td>
-                                <td>{bookingItems.clientName}/{bookingItems.clientEmail}</td>
+                                <td>{bookingItems.clientName}</td>
                                 <td>{bookingItems.companyName}</td>
                                 <td>{bookingItems.designation}</td>
                                 <td>{bookingItems.location}</td>

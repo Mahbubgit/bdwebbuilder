@@ -4,9 +4,14 @@ import auth from '../../firebase.init';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import Loading from '../Shared/Loading';
+import useLoginUser from '../../hooks/useLoginUser';
+import { format } from 'date-fns';
 
 const MyReview = () => {
     const [user, isLoading] = useAuthState(auth);
+    const [loginUserData, loginUserLoading] = useLoginUser(user);
+    const today = new Date();
+
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const imageStorageKey = '8be01473d7fc1567a492620a31b4d0fc';
@@ -49,7 +54,7 @@ const MyReview = () => {
                     })
                         .then(res => res.json())
                         .then(inserted => {
-                            console.log('review', inserted);
+                            // console.log('review', inserted);
                             if (inserted.insertedId) {
                                 toast.success('Your review added successfully');
                                 reset();
@@ -62,7 +67,7 @@ const MyReview = () => {
             })
     };
 
-    if (isLoading) {
+    if (isLoading || loginUserLoading) {
         return <Loading></Loading>
     }
 
@@ -79,7 +84,7 @@ const MyReview = () => {
                         type="text"
                         placeholder="Your Name"
                         className="input input-bordered w-full max-w-xs"
-                        value={user.displayName}
+                        value={loginUserData?.name}
                         {...register("name")}
                     />
 
@@ -107,7 +112,6 @@ const MyReview = () => {
                     <label className="label">
                         <span className="label-text">Review</span>
                     </label>
-                    {/* <textarea className="textarea textarea-bordered" placeholder="Message"></textarea> */}
                     <textarea
                         type="textarea"
                         placeholder="Review"
@@ -132,6 +136,7 @@ const MyReview = () => {
                         type="text"
                         placeholder="Your Designation"
                         className="input input-bordered w-full max-w-xs"
+                        value={loginUserData?.designation}
                         {...register("designation")}
                     />
                 </div>
@@ -143,6 +148,7 @@ const MyReview = () => {
                         type="text"
                         placeholder="Your Location"
                         className="input input-bordered w-full max-w-xs"
+                        value={loginUserData?.address}
                         {...register("location")}
                     />
                 </div>
@@ -154,6 +160,7 @@ const MyReview = () => {
                         type="text"
                         placeholder="Posting Month and Year"
                         className="input input-bordered w-full max-w-xs"
+                        value={format(today, 'MMMM, yyyy')}
                         {...register("post")}
                     />
                 </div>

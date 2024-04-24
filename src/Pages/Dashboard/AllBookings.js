@@ -1,38 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
+import AllBookingsRow from './AllBookingsRow';
+import { useQuery } from 'react-query';
+import Loading from '../Shared/Loading';
 
 const AllBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
 
-    console.log(user.displayName, user.email);
 
-    useEffect(() => {
-        if (user) {
-            fetch(`https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/bookingStatus`, {
-                method: 'GET',
-                headers: {
-                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-                }
-            })
-                .then(res => {
-                    console.log('res', res);
-                    if (res.status === 401 || res.status === 403) {
-                        signOut(auth);
-                        localStorage.removeItem('accessToken');
-                        navigate('/');
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    setBookings(data);
-                });
+    // useEffect(() => {
+    //     if (user) {
+    //         fetch(`http://localhost:5000/bookingStatus`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+    //             }
+    //         })
+    //             .then(res => {
+    //                 // console.log('res', res);
+    //                 if (res.status === 401 || res.status === 403) {
+    //                     signOut(auth);
+    //                     localStorage.removeItem('accessToken');
+    //                     navigate('/');
+    //                 }
+    //                 return res.json();
+    //             })
+    //             .then(data => {
+    //                 setBookings(data);
+    //             });
+    //     }
+    // }, [user]);
+
+
+    const { isLoading, refetch } = useQuery('manageBookings', () => fetch(`http://localhost:5000/bookingStatus`, {
+        method: 'GET',
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
-    }, [user]);
+    })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth);
+                localStorage.removeItem('accessToken');
+                navigate('/');
+            }
+            return res.json();
+        })
+        .then(data => {
+            setBookings(data);
+        })
+    );
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div>
@@ -52,21 +78,14 @@ const AllBookings = () => {
                     </thead>
                     <tbody>
                         {
-                            bookings.map((b, key) =>
-                                <tr className='hover text-xs' key={key}>
-                                    <th>{key + 1}</th>
-                                    <td>{b.clientName}</td>
-                                    <td>{b.companyName}</td>
-                                    <td>{b.serviceName}</td>
-                                    <td>{b.date}: {b.slot}</td>
-                                    <td>{b.status}</td>
-                                    <td className='flex'>
-                                        <button className="btn btn-xs btn-accent text-primary">Accepted</button>
-                                        <button className="btn btn-xs btn-accent text-white">Declined</button>
-                                    </td>
-                                </tr>)
+                            bookings.map((booking, index) => <AllBookingsRow
+                                key={index}
+                                index={index}
+                                booking={booking}
+                                refetch={refetch}
+                                setBookings={setBookings}
+                            ></AllBookingsRow>)
                         }
-
                     </tbody>
                 </table>
             </div>

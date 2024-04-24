@@ -1,11 +1,11 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
-const ManageUserRow = ({ u: user, index, refetch, setDeleteUser }) => {
+const ManageUserRow = ({ user, index, refetch, setDeleteUser }) => {
     const { img, role, email } = user;
 
     const makeAdmin = () => {
-        fetch(`https://nameless-shelf-67231-5f2c49be0d99.herokuapp.com/user/admin/${email}`, {
+        fetch(`http://localhost:5000/user/admin/${email}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -44,7 +44,7 @@ const ManageUserRow = ({ u: user, index, refetch, setDeleteUser }) => {
             <td>{user?.company}</td>
             <td>{user?.mobile}</td>
             <td>
-                <label onClick={() => setDeleteUser(user)} htmlFor="delete-confirm-modal" className="btn btn-sm btn-error">Delete</label>
+                <label onClick={() => setDeleteUser(user)} htmlFor="delete-confirm-modal" className="btn btn-sm btn-error text-white">Delete</label>
             </td>
         </tr>
     );
