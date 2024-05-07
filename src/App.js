@@ -27,6 +27,9 @@ import AllBookings from './Pages/Dashboard/AllBookings';
 import MyProfile from './Pages/Dashboard/MyProfile';
 import ManageUsers from './Pages/Dashboard/ManageUsers';
 import Testimonials from './Pages/About/Testimonials';
+import AddBlog from './Pages/Dashboard/AddBlog';
+import ContactMessage from './Pages/Dashboard/ContactMessage';
+import AddPortfolio from './Pages/Dashboard/AddPortfolio';
 
 function App() {
   return (
@@ -41,6 +44,7 @@ function App() {
         <Route path='portfolio' element={<Portfolio></Portfolio>}></Route>
         <Route path='pricing' element={<Pricing></Pricing>}></Route>
         <Route path='blog' element={<Blogs></Blogs>}></Route>
+        
         <Route path='faq' element={<Faq></Faq>}></Route>
         <Route path='contact' element={<Contact></Contact>}></Route>
         <Route path='order' element={
@@ -53,6 +57,9 @@ function App() {
           <Route path='myBookingHistory' element={<MyBookingHistory></MyBookingHistory>}></Route>
           <Route path='myReview' element={<MyReview></MyReview>}></Route>
           <Route path='myProfile' element={<MyProfile></MyProfile>}></Route>
+          <Route path='contactMessage' element={<RequireAdmin><ContactMessage></ContactMessage></RequireAdmin>}></Route>
+          <Route path='addBlog' element={<RequireAdmin><AddBlog></AddBlog></RequireAdmin>}></Route>
+          <Route path='addPortfolio' element={<RequireAdmin><AddPortfolio></AddPortfolio></RequireAdmin>}></Route>
           <Route path='allBookings' element={<RequireAdmin><AllBookings></AllBookings></RequireAdmin>}></Route>
           <Route path='manageUsers' element={<RequireAdmin><ManageUsers></ManageUsers></RequireAdmin>}></Route>
         </Route>

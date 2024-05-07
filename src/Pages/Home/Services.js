@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import services1 from '../../img/services/services1.jpg';
 import Service from './Service';
-import Button from '../Shared/Button';
+
 const Services = () => {
     const [services, setServices] = useState([]);
 

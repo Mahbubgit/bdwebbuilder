@@ -1,0 +1,6 @@
+.limited-text {
+    display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 6;  /* Number of lines displayed before it truncate */
+    overflow: hidden;
+}
