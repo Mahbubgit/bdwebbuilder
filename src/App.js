@@ -10,7 +10,7 @@ import Portfolio from './Pages/Portfolio/Portfolio';
 import Pricing from './Pages/Pricing/Pricing';
 import Services from './Pages/Home/Services';
 import Navbar from './Pages/Shared/Navbar';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Footer from './Pages/Shared/Footer';
 import Order from './Pages/Order/Order';
 import OrderStatus from './Pages/Order/OrderStatus';
@@ -30,6 +30,7 @@ import Testimonials from './Pages/About/Testimonials';
 import AddBlog from './Pages/Dashboard/AddBlog';
 import ContactMessage from './Pages/Dashboard/ContactMessage';
 import AddPortfolio from './Pages/Dashboard/AddPortfolio';
+import PortfolioDetail from './Pages/Portfolio/PortfolioDetail';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path='team' element={<Team></Team>}></Route>
         <Route path='testimonials' element={<Testimonials></Testimonials>}></Route>
         <Route path='services' element={<Services></Services>}></Route>
+        <Route path='portfolioDetail' element={<PortfolioDetail></PortfolioDetail>}></Route>
         <Route path='portfolio' element={<Portfolio></Portfolio>}></Route>
         <Route path='pricing' element={<Pricing></Pricing>}></Route>
         <Route path='blog' element={<Blogs></Blogs>}></Route>
@@ -57,6 +59,7 @@ function App() {
           <Route path='myBookingHistory' element={<MyBookingHistory></MyBookingHistory>}></Route>
           <Route path='myReview' element={<MyReview></MyReview>}></Route>
           <Route path='myProfile' element={<MyProfile></MyProfile>}></Route>
+
           <Route path='contactMessage' element={<RequireAdmin><ContactMessage></ContactMessage></RequireAdmin>}></Route>
           <Route path='addBlog' element={<RequireAdmin><AddBlog></AddBlog></RequireAdmin>}></Route>
           <Route path='addPortfolio' element={<RequireAdmin><AddPortfolio></AddPortfolio></RequireAdmin>}></Route>

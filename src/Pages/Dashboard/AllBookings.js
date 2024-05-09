@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
@@ -9,7 +9,7 @@ import Loading from '../Shared/Loading';
 
 const AllBookings = () => {
     const [bookings, setBookings] = useState([]);
-    const [user] = useAuthState(auth);
+    // const [user] = useAuthState(auth);
     const navigate = useNavigate();
 
 

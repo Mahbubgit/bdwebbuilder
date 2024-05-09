@@ -1,15 +1,10 @@
 import React from 'react';
-// import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-// import auth from '../../firebase.init';
-import { format } from 'date-fns';
 import Loading from '../Shared/Loading';
 import { useQuery } from 'react-query';
 
 const AddPortfolio = () => {
-    // const [user] = useAuthState(auth);
-    // const [portfolioCategory, setPortfolioCategory] = useState(null);
 
     const { data: categories, isLoading } =
         useQuery(['viewCategory'],
@@ -19,12 +14,9 @@ const AddPortfolio = () => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const today = new Date();
-
     const imageStorageKey = '8be01473d7fc1567a492620a31b4d0fc';
 
     const onSubmit = async data => {
-        // console.log('data', data);
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
@@ -110,14 +102,6 @@ const AddPortfolio = () => {
                                 <option key={index} value={catName}>{catName}</option>
                             )}
                         </select>
-                        
-                        {/* <input
-                            type="text"
-                            placeholder="Category Name"
-                            className="input input-bordered w-full max-w-xs"
-                            {...register("category")}
-                        /> */}
-                        
                     </div>
 
                     <div className="form-control w-full max-w-xs">
@@ -217,7 +201,6 @@ const AddPortfolio = () => {
 
                     <div>
                         <input className='btn w-full max-w-xs btn-outline mt-3' type="submit" value="Add Portfolio" />
-                        {/* <p className='text-red-700'>*** Please input all fields. ***</p> */}
                     </div>
                 </form>
             </div>

@@ -3,7 +3,6 @@ import HeroPic from '../../img/hero-bg.jpg';
 
 const Banner = () => {
     return (
-        // <div className="hero min-h-screen place-items-start  ">
         <div className="hero place-items-start  ">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src={HeroPic} className="sm:max-w-sm md:max-w-md lg:max-w-lg rounded-lg shadow-2xl" alt='' />
