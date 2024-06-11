@@ -41,20 +41,20 @@ const Contact = () => {
             <Info></Info>
             <div className='flex justify-center items-center text-center'>
                 <div>
-                    <h4 className='text-xl lg:text-2xl text-primary font-bold m-5'>Contact Us</h4>
-                    <h2 className='text-2xl lg:text-4xl text-accent'>Stay connected with us</h2>
+                    <h4 className='text-xl lg:text-2xl text-primary font-bold m-5'>যোগাযোগ করুন</h4>
+                    <h2 className='text-2xl lg:text-4xl text-accent'>আমাদের সাথে যুক্ত থাকুন</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-1 gap-3 my-6'>
 
                         <div className="form-control mx-auto w-full max-w-xs">
                             <input
                                 type="text"
-                                placeholder="Your Name"
+                                placeholder="আপনার নাম"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("name", {
                                     required: {
                                         value: true,
-                                        message: 'Name is Required'
+                                        message: 'নাম আবশ্যক'
                                     }
                                 }
                                 )}
@@ -67,12 +67,12 @@ const Contact = () => {
                         <div className="form-control mx-auto w-full max-w-xs">
                             <input
                                 type="text"
-                                placeholder="Your Email"
+                                placeholder="আপনার ইমেইল"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("email", {
                                     required: {
                                         value: true,
-                                        message: 'Email is Required'
+                                        message: 'ইমেইল আবশ্যক'
                                     }
                                 }
                                 )}
@@ -85,12 +85,12 @@ const Contact = () => {
                         <div className="form-control mx-auto w-full max-w-xs">
                             <input
                                 type="text"
-                                placeholder="Your Mobile No"
+                                placeholder="আপনার মোবাইল নম্বর"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("mobile", {
                                     required: {
                                         value: true,
-                                        message: 'Mobile Number is Required'
+                                        message: 'মোবাইল নম্বর আবশ্যক'
                                     }
                                 }
                                 )}
@@ -100,16 +100,15 @@ const Contact = () => {
                             </label>
                         </div>
 
-
                         <div className="form-control mx-auto w-full max-w-xs">
                             <input
                                 type="text"
-                                placeholder="Subject"
+                                placeholder="বিষয়"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("subject", {
                                     required: {
                                         value: true,
-                                        message: 'Subject is Required'
+                                        message: 'বিষয় আবশ্যক'
                                     }
                                 }
                                 )}
@@ -122,12 +121,12 @@ const Contact = () => {
                         <div className="form-control mx-auto w-full max-w-xs">
                             <textarea
                                 type="textarea"
-                                placeholder="Your Message"
+                                placeholder="আপনার মেসেজ"
                                 className="textarea textarea-bordered w-full max-w-xs"
                                 {...register("messageInfo", {
                                     required: {
                                         value: true,
-                                        message: 'Message is Required'
+                                        message: 'মেসেজ আবশ্যক'
                                     }
                                 }
                                 )}

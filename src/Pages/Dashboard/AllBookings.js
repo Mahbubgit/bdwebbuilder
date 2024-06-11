@@ -71,7 +71,8 @@ const AllBookings = () => {
                             <th>Name</th>
                             <th>Company</th>
                             <th className='text-center'>Service</th>
-                            <th className='text-center'>Date & Time</th>
+                            <th className='text-center'>Date</th>
+                            <th className='text-center'>Plan</th>
                             <th>Status</th>
                             <th className='text-center'>Action</th>
                         </tr>

@@ -31,6 +31,7 @@ import AddBlog from './Pages/Dashboard/AddBlog';
 import ContactMessage from './Pages/Dashboard/ContactMessage';
 import AddPortfolio from './Pages/Dashboard/AddPortfolio';
 import PortfolioDetail from './Pages/Portfolio/PortfolioDetail';
+import NotFound from './Pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -69,6 +70,8 @@ function App() {
         <Route path='orderStatus' element={<OrderStatus></OrderStatus>}></Route>
         <Route path='login' element={<Login></Login>}></Route>
         <Route path='signup' element={<SignUp></SignUp>}></Route>
+
+        <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
       <ToastContainer />

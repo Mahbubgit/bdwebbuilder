@@ -2,7 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 const AllBookingsRow = ({ booking, index, refetch }) => {
-    const { _id, role, clientName,  companyName, serviceName, date, slot, status } = booking;
+    const { _id, role, clientName, companyName, serviceName, date, slot, planName, status } = booking;
 
     const btnAccepted = () => {
         fetch(`http://localhost:5000/bookingUpdate/${_id}`, {
@@ -44,7 +44,7 @@ const AllBookingsRow = ({ booking, index, refetch }) => {
                 }
             })
     }
-    
+
     const btnFinished = () => {
         fetch(`http://localhost:5000/bookingFinish/${_id}`, {
             method: 'PATCH',
@@ -70,13 +70,14 @@ const AllBookingsRow = ({ booking, index, refetch }) => {
             <td>{clientName}</td>
             <td>{companyName}</td>
             <td>{serviceName}</td>
-            <td>{date}: {slot}</td>
+            <td>{date}</td>
+            <td>{planName}</td>
             <td>{status}</td>
             <td className='flex gap-1'>
                 {booking?.role}
                 {role !== 'admin' && status === 'Pending' && <button onClick={btnAccepted} className="btn btn-sm btn-primary">Accepted</button>}
                 {role !== 'admin' && status !== 'Canceled' && status !== 'Finished' && <button onClick={btnCanceled} className="btn btn-sm btn-accent text-white">Canceled</button>}
-                {role !== 'admin' && status !== 'Canceled' && status !== 'Pending' && status !== 'Finished' && <button onClick={btnFinished}  className="btn btn-sm btn-secondary">Finished</button>}
+                {role !== 'admin' && status !== 'Canceled' && status !== 'Pending' && status !== 'Finished' && <button onClick={btnFinished} className="btn btn-sm btn-secondary">Finished</button>}
             </td>
         </tr>
     );

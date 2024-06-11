@@ -54,7 +54,7 @@ const MyBookings = () => {
                             <th>Name</th>
                             <th>Service</th>
                             <th>Date</th>
-                            <th>Time</th>
+                            <th>Plan</th>
                             <th>Action</th>
                         </tr>
                     </thead>

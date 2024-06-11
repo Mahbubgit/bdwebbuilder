@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import useLoginUser from '../../hooks/useLoginUser';
 
 const OrderModal = ({ development, date, setDevelopment, refetch }) => {
-    const { _id, name, slots } = development;
+    const { _id, name, slots, plan } = development;
     const [user] = useAuthState(auth);
     const formattedDate = format(date, 'PP');
     const [loginUserData] = useLoginUser(user);
@@ -14,6 +14,7 @@ const OrderModal = ({ development, date, setDevelopment, refetch }) => {
     const handleOrder = event => {
         event.preventDefault();
         const slot = event.target.slot.value;
+        const planName = event.target.plan.value;
         // console.log(_id, name, slot);
 
         const booking = {
@@ -21,6 +22,7 @@ const OrderModal = ({ development, date, setDevelopment, refetch }) => {
             serviceName: name,
             date: formattedDate,
             slot,
+            planName,
             clientName: user.displayName,
             clientEmail: user.email,
             companyName: event.target.companyName.value,
@@ -68,13 +70,22 @@ const OrderModal = ({ development, date, setDevelopment, refetch }) => {
                             }
                         </select>
 
+                        <select name='plan' className="select select-bordered w-full max-w-xs">
+                            {
+                                plan.map((planItem, index) => <option
+                                    key={index}
+                                    value={planItem}
+                                >{planItem}</option>)
+                            }
+                        </select>
+
                         <input type="text" name="name" disabled value={loginUserData?.name} className="input input-bordered w-full max-w-xs" />
                         <input type="email" name="email" disabled value={user?.email} className="input input-bordered w-full max-w-xs" />
                         <input type="text" name="companyName" value={loginUserData?.company} placeholder="Company Name" className="input input-bordered w-full max-w-xs" />
                         <input type="text" name="designation" value={loginUserData?.designation} placeholder="Designation" className="input input-bordered w-full max-w-xs" />
                         <input type="text" name="location" value={loginUserData?.address} placeholder="Location" className="input input-bordered w-full max-w-xs" />
                         <input type="text" name="phone" value={loginUserData?.mobile} maxLength={11} placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
-                        <input type="submit" value="Submit" className="btn text-white font-bold bg-gradient-to-r from-primary to-secondary max-w-xs" />
+                        <input type="submit" value="Submit" className="btn btn-sm text-white font-bold bg-gradient-to-r from-primary to-secondary max-w-xs" />
                     </form>
                 </div>
             </div>

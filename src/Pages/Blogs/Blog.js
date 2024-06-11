@@ -5,8 +5,8 @@ const Blog = ({ blog, setViewBlog }) => {
     const { img, title, description, bloggerName, postingDate } = blog;
 
     return (
-        <div className='lg:px-6'>
-            <div className='m-6 items-center text-center'>
+        <div className='p-2'>
+            <div className='items-center text-center'>
                 <h3 className="lg:text-2xl font-bold text-primary">{title}</h3>
                 <p>
                     <small className='lg:mr-3'>{bloggerName}</small>

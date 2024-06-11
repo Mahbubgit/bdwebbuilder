@@ -1,14 +1,14 @@
 import React from 'react';
 
 const MyBookingRow = ({ booking, index, setDeleteBooking }) => {
-    const { _id, clientName, serviceName, date, slot, status } = booking;
+    const { _id, clientName, serviceName, date, planName, status } = booking;
     return (
         <tr className='hover'>
             <th>{index + 1}</th>
             <td>{clientName}</td>
             <td>{serviceName}</td>
             <td>{date}</td>
-            <td>{slot}</td>
+            <td>{planName}</td>
             <td>
                 {
                     status === 'Pending' &&

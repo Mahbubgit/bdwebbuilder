@@ -46,7 +46,7 @@ const MyBookingHistory = () => {
                             <th>Company</th>
                             <th>Service</th>
                             <th>Date</th>
-                            <th>Time</th>
+                            <th>Plan</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -59,7 +59,7 @@ const MyBookingHistory = () => {
                                     <td>{b.companyName}</td>
                                     <td>{b.serviceName}</td>
                                     <td>{b.date}</td>
-                                    <td>{b.slot}</td>
+                                    <td>{b.planName}</td>
                                     <td>{b.status}</td>
                                 </tr>)
                         }

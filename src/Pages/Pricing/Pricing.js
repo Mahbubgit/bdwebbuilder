@@ -3,15 +3,8 @@ import React from 'react';
 const Pricing = () => {
     return (
         <div>
-            <div className='lg:flex'>
-                <ul className="steps steps-horizontal">
-                    <li className="step step-primary">Sign Up</li>
-                    <li className="step step-primary">Choose Plan</li>
-                    <li className="step step-primary">Buy Website</li>
-                    <li className="step step-primary">Hosting</li>
-                    <li className="step step-primary">Enjoy Business</li>
-                </ul>
-                <h2 className='text-3xl text-primary font-bold text-center'>Choose A Plan That Fits To Your Business</h2>
+            <div>
+                <h2 className='lg:text-2xl text-primary font-bold text-center'>Choose A Plan That Fits To Your Business</h2>
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 my-10'>
 
